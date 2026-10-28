@@ -17,6 +17,7 @@ import logging
 import os
 import sys
 import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from logging.handlers import RotatingFileHandler
@@ -42,12 +43,20 @@ def setup_logging():
 
 
 def fetch(url, retries=3, timeout=60):
+    # The API's firewall returns 403 for Python's default "Python-urllib" User-Agent.
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (compatible; wis2-wavebuoy-fetch/1.0)",
+        "Accept": "application/json",
+    })
     for attempt in range(1, retries + 1):
         try:
-            with urllib.request.urlopen(url, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return json.load(resp)
         except Exception as exc:
-            if attempt == retries:
+            # 4xx errors (except 429 Too Many Requests) won't fix themselves on retry.
+            client_error = (isinstance(exc, urllib.error.HTTPError)
+                            and 400 <= exc.code < 500 and exc.code != 429)
+            if attempt == retries or client_error:
                 raise
             log.warning("Fetch attempt %d/%d failed (%s), retrying in 5s", attempt, retries, exc)
             time.sleep(5)
@@ -132,6 +141,9 @@ def main():
     log.info("===== Run started =====")
     try:
         run(config_path)
+    except KeyboardInterrupt:
+        log.warning("Run INTERRUPTED (Ctrl+C), last_data_time not updated")
+        sys.exit(130)
     except Exception as exc:
         log.exception("Run FAILED, last_data_time not updated: %s", exc)
         log.info("===== Run finished with errors =====")
