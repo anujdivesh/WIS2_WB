@@ -1,0 +1,13 @@
+{
+  "url": "https://ocean-obs-api.spc.int/insitu/get_data/station/SPOT-0403?limit=100",
+  "station_id": "0-22000-0-5202533",
+  "last_data_time": "2026-10-28T00:23:31.000Z",
+  "minio": {
+    "endpoint": "localhost:9000",
+    "secure": false,
+    "access_key": "wis2box",
+    "secret_key": "<your-wis2box-storage-password>",
+    "bucket": "wis2box-incoming",
+    "path": "int-spc/data/core/ocean/surface-based-observations/wave-buoys"
+  }
+}

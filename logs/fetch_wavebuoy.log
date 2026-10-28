@@ -1,0 +1,131 @@
+2026-10-28 12:49:50 INFO    ===== Run started =====
+2026-10-28 12:49:50 INFO    Reading config /Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/config.json
+2026-10-28 12:49:50 INFO    last_data_time = 2026-10-27T00:23:31.000Z
+2026-10-28 12:49:50 INFO    Fetching https://ocean-obs-api.spc.int/insitu/get_data/station/SPOT-0403?limit=100
+2026-10-28 12:49:51 INFO    Received 100 record(s) from API
+2026-10-28 12:49:51 INFO    48 new record(s) for 0-22000-0-5202533, 2026-10-27T00:53:31.000Z to 2026-10-28T00:23:31.000Z
+2026-10-28 12:49:52 INFO    Wrote /Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/output/0-22000-0-5202533_20261028T004951Z.json
+2026-10-28 12:49:55 INFO    Uploading 0-22000-0-5202533_20261028T004951Z.json to localhost:9000 -> wis2box-incoming/int-spc/data/core/ocean/surface-based-observations/wave-buoys/0-22000-0-5202533_20261028T004951Z.json
+2026-10-28 12:50:01 ERROR   Run FAILED, last_data_time not updated: HTTPConnectionPool(host='localhost', port=9000): Max retries exceeded with url: /wis2box-incoming?location= (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/fetch_wavebuoy.py", line 134, in main
+    run(config_path)
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/fetch_wavebuoy.py", line 116, in run
+    dest = upload_to_minio(config["minio"], out_file)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/fetch_wavebuoy.py", line 72, in upload_to_minio
+    client.fput_object(bucket, object_name, str(file_path), content_type="application/json")
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 1054, in fput_object
+    return self.put_object(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 2015, in put_object
+    raise exc
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 1960, in put_object
+    return self._put_object(
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 1789, in _put_object
+    response = self._execute(
+               ^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 441, in _execute
+    region = self._get_region(bucket_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 498, in _get_region
+    response = self._url_open(
+               ^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 306, in _url_open
+    response = self._http.urlopen(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/poolmanager.py", line 459, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 886, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 886, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 886, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/util/retry.py", line 555, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=9000): Max retries exceeded with url: /wis2box-incoming?location= (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2026-10-28 12:50:01 INFO    ===== Run finished with errors =====
+2026-10-28 12:50:03 INFO    ===== Run started =====
+2026-10-28 12:50:03 INFO    Reading config /Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/config.json
+2026-10-28 12:50:03 INFO    last_data_time = 2026-10-27T00:23:31.000Z
+2026-10-28 12:50:03 INFO    Fetching https://ocean-obs-api.spc.int/insitu/get_data/station/SPOT-0403?limit=100
+2026-10-28 12:50:04 INFO    Received 100 record(s) from API
+2026-10-28 12:50:04 INFO    48 new record(s) for 0-22000-0-5202533, 2026-10-27T00:53:31.000Z to 2026-10-28T00:23:31.000Z
+2026-10-28 12:50:04 INFO    Wrote /Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/output/0-22000-0-5202533_20261028T005004Z.json
+2026-10-28 12:50:04 INFO    Uploading 0-22000-0-5202533_20261028T005004Z.json to localhost:9000 -> wis2box-incoming/int-spc/data/core/ocean/surface-based-observations/wave-buoys/0-22000-0-5202533_20261028T005004Z.json
+2026-10-28 12:50:10 ERROR   Run FAILED, last_data_time not updated: HTTPConnectionPool(host='localhost', port=9000): Max retries exceeded with url: /wis2box-incoming?location= (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/fetch_wavebuoy.py", line 134, in main
+    run(config_path)
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/fetch_wavebuoy.py", line 116, in run
+    dest = upload_to_minio(config["minio"], out_file)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/fetch_wavebuoy.py", line 72, in upload_to_minio
+    client.fput_object(bucket, object_name, str(file_path), content_type="application/json")
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 1054, in fput_object
+    return self.put_object(
+           ^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 2015, in put_object
+    raise exc
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 1960, in put_object
+    return self._put_object(
+           ^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 1789, in _put_object
+    response = self._execute(
+               ^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 441, in _execute
+    region = self._get_region(bucket_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 498, in _get_region
+    response = self._url_open(
+               ^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/minio/api.py", line 306, in _url_open
+    response = self._http.urlopen(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/poolmanager.py", line 459, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 886, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 886, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 886, in urlopen
+    return self.urlopen(
+           ^^^^^^^^^^^^^
+  [Previous line repeated 2 more times]
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/vwis2/lib/python3.12/site-packages/urllib3/util/retry.py", line 555, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=9000): Max retries exceeded with url: /wis2box-incoming?location= (Caused by ProtocolError('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')))
+2026-10-28 12:50:10 INFO    ===== Run finished with errors =====
+2026-10-28 12:50:14 INFO    ===== Run started =====
+2026-10-28 12:50:14 INFO    Reading config /Users/anujdivesh/Desktop/wis2.0/wavebuoy_data/config.json
+2026-10-28 12:50:14 INFO    last_data_time = 2026-10-28T00:23:31.000Z
+2026-10-28 12:50:14 INFO    Fetching https://ocean-obs-api.spc.int/insitu/get_data/station/SPOT-0403?limit=100
+2026-10-28 12:50:15 INFO    Received 100 record(s) from API
+2026-10-28 12:50:15 INFO    No new data for 0-22000-0-5202533 since 2026-10-28T00:23:31.000Z, nothing to do
+2026-10-28 12:50:15 INFO    ===== Run finished OK =====
